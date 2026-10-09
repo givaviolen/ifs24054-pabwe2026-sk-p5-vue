@@ -13,12 +13,12 @@ import { Gavel } from "lucide-vue-next";
       </div>
       <div class="bg-white py-8 px-4 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-100">
         <div class="mb-8 grid grid-cols-2 rounded-xl bg-slate-100/80 p-1 text-center text-sm font-semibold">
-          <RouterLink to="/auth/login" class="rounded-lg py-2.5 transition-all text-slate-500 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Masuk Akun</RouterLink>
-          <RouterLink to="/auth/register" class="rounded-lg py-2.5 transition-all text-slate-500 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Daftar Baru</RouterLink>
+          <RouterLink to="/auth/login" class="rounded-lg py-2.5 transition-all text-slate-600 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Masuk Akun</RouterLink>
+          <RouterLink to="/auth/register" class="rounded-lg py-2.5 transition-all text-slate-600 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Daftar Baru</RouterLink>
         </div>
         <RouterView />
       </div>
-      <p class="mt-8 text-center text-sm text-slate-500">
+      <p class="mt-8 text-center text-sm text-slate-600">
         &copy; 2026 Pengembangan Aplikasi Web. All rights reserved.
       </p>
     </div>

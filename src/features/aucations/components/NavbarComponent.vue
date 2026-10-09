@@ -61,7 +61,7 @@ const navItems = [
             </div>
             <img :src="photoUrl(users.profile.photo)" alt="Foto" class="h-9 w-9 rounded-full ring-2 ring-emerald-500 object-cover" />
           </div>
-          <button @click="logout" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-emerald-100 bg-emerald-900/50 hover:bg-red-600 hover:text-white rounded-md transition-all">
+          <button @click="logout" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-emerald-900 hover:bg-red-700 hover:text-white rounded-md transition-all">
             <LogOut class="h-4 w-4" /> Keluar
           </button>
         </div>

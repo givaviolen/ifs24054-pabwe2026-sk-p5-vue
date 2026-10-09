@@ -49,7 +49,7 @@ async function deleteAll() {
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
       <div>
         <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">Eksplorasi Lelang</h1>
-        <p class="text-slate-500 mt-1">Temukan penawaran terbaik dan ikuti lelang impianmu.</p>
+        <p class="text-slate-600 mt-1">Temukan penawaran terbaik dan ikuti lelang impianmu.</p>
       </div>
       <div class="flex gap-3">
         <button v-if="tab === 'mine'" class="btn-danger shadow-md shadow-rose-500/20" @click="deleteAll">
@@ -77,9 +77,9 @@ async function deleteAll() {
     </div>
 
     <div v-if="store.isAucation" class="flex justify-center py-12">
-      <div class="animate-pulse flex flex-col items-center gap-4">
+      <div class="flex flex-col items-center gap-4" role="status">
         <div class="h-8 w-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-        <p class="text-slate-500 font-medium">Memuat data lelang...</p>
+        <p class="text-slate-600 font-medium">Memuat data lelang...</p>
       </div>
     </div>
     
@@ -88,20 +88,20 @@ async function deleteAll() {
         <Search class="h-8 w-8 text-slate-400" />
       </div>
       <h3 class="text-lg font-bold text-slate-700">Tidak Ada Lelang</h3>
-      <p class="text-slate-500 mt-1 max-w-sm text-center">Belum ada lelang yang sesuai dengan kriteria yang dipilih saat ini.</p>
+      <p class="text-slate-600 mt-1 max-w-sm text-center">Belum ada lelang yang sesuai dengan kriteria yang dipilih saat ini.</p>
     </div>
 
     <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <article v-for="a in filtered" :key="a.id" class="group bg-white flex flex-col overflow-hidden rounded-2xl border border-slate-200 hover:border-emerald-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
         <div class="h-48 bg-slate-100 relative overflow-hidden">
           <img v-if="a.cover" :src="a.cover" :alt="a.title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-          <div v-else class="h-full w-full flex items-center justify-center text-slate-400">
+          <div v-else class="h-full w-full flex items-center justify-center text-slate-600">
             Tanpa Gambar
           </div>
           <!-- Status Badge overlapping image -->
           <div class="absolute top-3 right-3">
             <span class="rounded-full px-3 py-1 text-xs font-extrabold uppercase tracking-wider backdrop-blur-md"
-              :class="isClosed(a, now) ? 'bg-slate-900/70 text-white' : 'bg-emerald-500/90 text-white'">
+              :class="isClosed(a, now) ? 'bg-slate-900/70 text-white' : 'bg-emerald-700 text-white'">
               {{ isClosed(a, now) ? "Berakhir" : "Live" }}
             </span>
           </div>
@@ -109,16 +109,16 @@ async function deleteAll() {
         
         <div class="flex flex-1 flex-col p-5">
           <h2 class="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-emerald-700 transition-colors">{{ a.title }}</h2>
-          <p class="text-sm text-slate-500 mt-1">oleh <span class="font-medium text-slate-700">{{ a.author?.name }}</span></p>
+          <p class="text-sm text-slate-600 mt-1">oleh <span class="font-medium text-slate-700">{{ a.author?.name }}</span></p>
           
           <div class="mt-4 pt-4 border-t border-slate-100 space-y-2">
             <div class="flex justify-between items-center text-sm">
-              <span class="text-slate-500">Harga Buka</span>
+              <span class="text-slate-600">Harga Buka</span>
               <span class="font-medium text-slate-700">{{ formatRupiah(a.start_bid) }}</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-slate-500 text-sm">Penawaran</span>
-              <span class="font-bold text-emerald-600 text-lg">{{ formatRupiah(highestBid(a)) }}</span>
+              <span class="text-slate-600 text-sm">Penawaran</span>
+              <span class="font-bold text-emerald-700 text-lg">{{ formatRupiah(highestBid(a)) }}</span>
             </div>
           </div>
           
