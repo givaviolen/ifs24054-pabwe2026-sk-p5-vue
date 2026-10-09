@@ -4,6 +4,9 @@ import AuthLayout from "./features/auth/layouts/AuthLayout.vue";
 import LoginPage from "./features/auth/pages/LoginPage.vue";
 import RegisterPage from "./features/auth/pages/RegisterPage.vue";
 
+import AucationLayout from "./features/aucations/layouts/AucationLayout.vue";
+import HomePage from "./features/aucations/pages/HomePage.vue";
+
 export const routes = [
   {
     path: "/auth",
@@ -17,10 +20,10 @@ export const routes = [
   },
   {
     path: "/",
-    component: () => import("./features/aucations/layouts/AucationLayout.vue"),
+    component: AucationLayout,
     meta: { auth: true },
     children: [
-      { path: "", component: () => import("./features/aucations/pages/HomePage.vue") },
+      { path: "", component: HomePage },
       { path: "aucations/:aucationId", component: () => import("./features/aucations/pages/DetailPage.vue") },
       { path: "users", component: () => import("./features/users/pages/UsersPage.vue") },
       { path: "profile", component: () => import("./features/users/pages/ProfilePage.vue") },

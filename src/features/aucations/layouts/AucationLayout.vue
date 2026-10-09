@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import NavbarComponent from "../components/NavbarComponent.vue";
-import SidebarComponent from "../components/SidebarComponent.vue";
 import { useUsersStore } from "../../users/states/usersStore";
 
 const open = ref(false);

@@ -81,7 +81,6 @@ const navItems = [
         <RouterLink
           v-for="item in navItems" :key="item.to" :to="item.to"
           class="flex items-center gap-3 px-3 py-3 rounded-md text-base font-medium text-emerald-100 hover:bg-emerald-800 hover:text-white"
-          @click="mobileMenuOpen = false"
         >
           <component :is="item.icon" class="h-5 w-5" /> {{ item.label }}
         </RouterLink>
