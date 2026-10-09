@@ -7,9 +7,9 @@ vi.mock("sweetalert2", () => ({ default: { fire: vi.fn() } }));
 describe("toolsHelper", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("dialog success & error memanggil Swal", () => {
-    t.showSuccessDialog("ok");
-    t.showErrorDialog("bad");
+  it("dialog success & error memanggil Swal", async () => {
+    await t.showSuccessDialog("ok");
+    await t.showErrorDialog("bad");
     expect(Swal.fire).toHaveBeenCalledTimes(2);
   });
 

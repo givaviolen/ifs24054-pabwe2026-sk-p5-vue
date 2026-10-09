@@ -1,13 +1,14 @@
-import Swal from "sweetalert2";
+// SweetAlert2 dimuat saat dibutuhkan agar tidak membebani bundle awal.
+const loadSwal = async () => (await import("sweetalert2")).default;
 
-export const showSuccessDialog = (text, title = "Berhasil") =>
-  Swal.fire({ icon: "success", title, text, timer: 1500, showConfirmButton: false });
+export const showSuccessDialog = async (text, title = "Berhasil") =>
+  (await loadSwal()).fire({ icon: "success", title, text, timer: 1500, showConfirmButton: false });
 
-export const showErrorDialog = (text, title = "Gagal") =>
-  Swal.fire({ icon: "error", title, text });
+export const showErrorDialog = async (text, title = "Gagal") =>
+  (await loadSwal()).fire({ icon: "error", title, text });
 
 export const showConfirmDialog = async (text, title = "Apakah kamu yakin?") => {
-  const result = await Swal.fire({
+  const result = await (await loadSwal()).fire({
     icon: "warning", title, text,
     showCancelButton: true, confirmButtonText: "Ya", cancelButtonText: "Batal",
     confirmButtonColor: "#4f46e5",
