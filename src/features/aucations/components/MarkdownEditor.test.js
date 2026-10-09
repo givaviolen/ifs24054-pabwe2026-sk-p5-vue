@@ -1,12 +1,16 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import { flushPromises, mount } from "@vue/test-utils";
 import Editor from "@toast-ui/editor";
 import MarkdownEditor from "./MarkdownEditor.vue";
 
 describe("MarkdownEditor", () => {
+  beforeEach(() => {
+    Editor.last = undefined;
+  });
+
   it("menginisialisasi Editor, emit perubahan, dan destroy saat unmount", async () => {
     const wrapper = mount(MarkdownEditor, { props: { modelValue: "halo" } });
-    await flushPromises();
+    await vi.waitFor(() => expect(Editor.last).toBeDefined());
     const editor = Editor.last;
     expect(editor.options.initialValue).toBe("halo");
     expect(editor.options.height).toBe("260px");
@@ -18,7 +22,7 @@ describe("MarkdownEditor", () => {
 
   it("memakai nilai awal kosong secara default", async () => {
     mount(MarkdownEditor);
-    await flushPromises();
+    await vi.waitFor(() => expect(Editor.last).toBeDefined());
     expect(Editor.last.options.initialValue).toBe("");
   });
 
