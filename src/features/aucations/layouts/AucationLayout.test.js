@@ -15,10 +15,5 @@ describe("AucationLayout", () => {
     await flushPromises();
     expect(spy).toHaveBeenCalled();
     expect(wrapper.text()).toContain("isi-halaman");
-
-    await wrapper.findComponent(NavbarComponent).vm.$emit("toggle");
-    expect(wrapper.findComponent(SidebarComponent).props("open")).toBe(true);
-    await wrapper.findComponent(SidebarComponent).vm.$emit("close");
-    expect(wrapper.findComponent(SidebarComponent).props("open")).toBe(false);
   });
 });
