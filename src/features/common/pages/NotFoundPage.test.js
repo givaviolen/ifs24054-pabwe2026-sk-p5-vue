@@ -1,17 +1,11 @@
-import { describe, it, expect } from 'vitest'
-import { render } from '@testing-library/vue'
-import NotFoundPage from './NotFoundPage.vue'
-import router from '../../../router'
+import { describe, it, expect } from "vitest";
+import NotFoundPage from "./NotFoundPage.vue";
+import { renderWithProviders } from "../../../test-utils";
 
-describe('NotFoundPage.vue', () => {
-  it('renders 404 message', () => {
-    const { getByText } = render(NotFoundPage, {
-      global: {
-        plugins: [router]
-      }
-    })
-    expect(getByText('404')).toBeInTheDocument()
-    expect(getByText('Halaman tidak ditemukan.')).toBeInTheDocument()
-    expect(getByText('Kembali ke Beranda')).toBeInTheDocument()
-  })
-})
+describe("NotFoundPage", () => {
+  it("menampilkan 404 dan tautan kembali", async () => {
+    const { wrapper } = await renderWithProviders(NotFoundPage);
+    expect(wrapper.text()).toContain("404");
+    expect(wrapper.find("a").attributes("href")).toBe("/");
+  });
+});

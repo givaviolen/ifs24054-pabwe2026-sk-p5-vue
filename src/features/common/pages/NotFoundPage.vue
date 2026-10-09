@@ -1,15 +1,7 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-50">
-    <div class="text-center">
-      <h1 class="text-6xl font-bold text-gray-900">404</h1>
-      <p class="mt-4 text-xl text-gray-600">Halaman tidak ditemukan.</p>
-      <RouterLink to="/" class="mt-6 inline-block px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-        Kembali ke Beranda
-      </RouterLink>
-    </div>
+  <div class="flex min-h-screen flex-col items-center justify-center gap-3 text-center">
+    <h1 class="text-7xl font-extrabold text-indigo-600">404</h1>
+    <p class="text-slate-500">Halaman yang kamu cari tidak ditemukan.</p>
+    <RouterLink to="/" class="btn-primary">Kembali ke Beranda</RouterLink>
   </div>
 </template>
-
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
