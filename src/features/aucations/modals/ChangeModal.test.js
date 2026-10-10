@@ -14,19 +14,6 @@ const setup = async (props = {}) => {
   return { ...r, store: useAucationsStore(r.pinia) };
 };
 
-// Stub komponen markdown agar editor Toast UI (lazy import) tidak dimuat saat tes berjalan.
-vi.mock("../components/MarkdownEditor.vue", async () => {
-  const { defineComponent, h } = await import("vue");
-  return {
-    default: defineComponent({
-      name: "MarkdownEditor",
-      props: { modelValue: { type: String, default: "" } },
-      emits: ["update:modelValue"],
-      render() { return h("div", { "data-testid": "markdown-editor" }); },
-    }),
-  };
-});
-
 describe("ChangeModal", () => {
   beforeEach(() => vi.resetAllMocks());
 

@@ -10,18 +10,6 @@ import { useUsersStore } from "../../users/states/usersStore";
 import { getAucation } from "../api/aucationApi";
 import { showConfirmDialog } from "../../../helpers/toolsHelper";
 
-// Stub komponen markdown agar editor Toast UI (lazy import) tidak dimuat saat tes berjalan.
-vi.mock("../components/MarkdownViewer.vue", async () => {
-  const { defineComponent, h } = await import("vue");
-  return {
-    default: defineComponent({
-      name: "MarkdownViewer",
-      props: { value: { type: String, default: "" } },
-      render() { return h("div", { "data-testid": "markdown-viewer" }, this.value); },
-    }),
-  };
-});
-
 vi.mock("../api/aucationApi");
 vi.mock("../../../helpers/toolsHelper", async (orig) => ({
   ...(await orig()), showConfirmDialog: vi.fn(), showErrorDialog: vi.fn(), showSuccessDialog: vi.fn(),

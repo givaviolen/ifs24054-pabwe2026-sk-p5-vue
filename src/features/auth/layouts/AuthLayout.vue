@@ -3,24 +3,21 @@ import { Gavel } from "lucide-vue-next";
 </script>
 
 <template>
-  <main class="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-      <div class="flex justify-center items-center gap-2 mb-6">
-        <Gavel class="h-10 w-10 text-emerald-600" />
-        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
-          Delcom Auction
-        </h1>
-      </div>
-      <div class="bg-white py-8 px-4 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-100">
-        <div class="mb-8 grid grid-cols-2 rounded-xl bg-slate-100/80 p-1 text-center text-sm font-semibold">
-          <RouterLink to="/auth/login" class="rounded-lg py-2.5 transition-all text-slate-600 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Masuk Akun</RouterLink>
-          <RouterLink to="/auth/register" class="rounded-lg py-2.5 transition-all text-slate-600 hover:text-slate-700" active-class="bg-white text-emerald-700 shadow-sm ring-1 ring-slate-900/5">Daftar Baru</RouterLink>
+  <main class="grid min-h-screen lg:grid-cols-2">
+    <div class="hidden flex-col justify-center bg-gradient-to-br from-indigo-600 to-violet-700 p-12 text-white lg:flex">
+      <Gavel class="mb-6 h-12 w-12" />
+      <h1 class="text-4xl font-extrabold">Delcom Auction</h1>
+      <p class="mt-3 max-w-md text-indigo-100">Pasang lelang barangmu dan ajukan penawaran terbaik secara real-time.</p>
+    </div>
+    <div class="flex items-center justify-center p-6">
+      <div class="w-full max-w-md">
+        <h1 class="mb-6 text-center text-2xl font-extrabold text-indigo-600 lg:hidden">Delcom Auction</h1>
+        <div class="mb-6 grid grid-cols-2 rounded-xl bg-slate-100 p-1 text-center text-sm font-semibold">
+          <RouterLink to="/auth/login" class="rounded-lg py-2" active-class="bg-white text-indigo-600 shadow">Masuk Akun</RouterLink>
+          <RouterLink to="/auth/register" class="rounded-lg py-2" active-class="bg-white text-indigo-600 shadow">Daftar Baru</RouterLink>
         </div>
-        <RouterView />
+        <div class="card"><RouterView /></div>
       </div>
-      <p class="mt-8 text-center text-sm text-slate-600">
-        &copy; 2026 Pengembangan Aplikasi Web. All rights reserved.
-      </p>
     </div>
   </main>
 </template>

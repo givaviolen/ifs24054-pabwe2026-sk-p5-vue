@@ -9,7 +9,7 @@ export const removeAccessToken = () => localStorage.removeItem(TOKEN_KEY);
  * Melempar Error (dengan properti `data`) jika status bukan "success".
  */
 export async function apiFetch(path, { method = "GET", body, params, auth = true } = {}) {
-  const url = new URL(DELCOM_BASEURL.replace(/\/$/, "") + path);
+  const url = new URL(DELCOM_BASEURL.replace(/\/$/, "") + path, window.location.origin);
   Object.entries(params || {}).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, value);
   });

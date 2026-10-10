@@ -1,16 +1,17 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { flushPromises, mount } from "@vue/test-utils";
 import Editor from "@toast-ui/editor";
 import MarkdownViewer from "./MarkdownViewer.vue";
 
-describe("MarkdownViewer", () => {
-  beforeEach(() => {
-    Editor.last = undefined;
-  });
+const loaded = async () => {
+  await vi.dynamicImportSettled();
+  await flushPromises();
+};
 
+describe("MarkdownViewer", () => {
   it("membuat viewer dan memperbarui isi saat prop berubah", async () => {
     const wrapper = mount(MarkdownViewer, { props: { value: "# Judul" } });
-    await vi.waitFor(() => expect(Editor.last).toBeDefined());
+    await loaded();
     const viewer = Editor.last;
     expect(viewer.options.viewer).toBe(true);
     expect(viewer.options.initialValue).toBe("# Judul");
@@ -20,7 +21,7 @@ describe("MarkdownViewer", () => {
 
   it("memakai nilai kosong secara default", async () => {
     mount(MarkdownViewer);
-    await vi.waitFor(() => expect(Editor.last).toBeDefined());
+    await loaded();
     expect(Editor.last.options.initialValue).toBe("");
   });
 
@@ -28,7 +29,7 @@ describe("MarkdownViewer", () => {
     Editor.last = undefined;
     const wrapper = mount(MarkdownViewer);
     wrapper.unmount();
-    await flushPromises();
+    await loaded();
     expect(Editor.last).toBeUndefined();
   });
 });

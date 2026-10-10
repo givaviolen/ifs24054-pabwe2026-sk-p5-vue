@@ -18,19 +18,6 @@ const fill = async (wrapper, { title = "Laptop", bid = "1000", close = "2026-12-
   await wrapper.find("#a-close").setValue(close);
 };
 
-// Stub komponen markdown agar editor Toast UI (lazy import) tidak dimuat saat tes berjalan.
-vi.mock("../components/MarkdownEditor.vue", async () => {
-  const { defineComponent, h } = await import("vue");
-  return {
-    default: defineComponent({
-      name: "MarkdownEditor",
-      props: { modelValue: { type: String, default: "" } },
-      emits: ["update:modelValue"],
-      render() { return h("div", { "data-testid": "markdown-editor" }); },
-    }),
-  };
-});
-
 describe("AddModal", () => {
   beforeEach(() => vi.resetAllMocks());
 

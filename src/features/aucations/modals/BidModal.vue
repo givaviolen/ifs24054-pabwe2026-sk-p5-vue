@@ -26,7 +26,7 @@ async function submit() {
 <template>
   <ModalShell :show="show" title="Ajukan Penawaran" @close="emit('close')">
     <form class="space-y-4" @submit.prevent="submit">
-      <p v-if="aucation" class="text-sm text-slate-600">Penawaran tertinggi saat ini: <b>{{ formatRupiah(highestBid(aucation)) }}</b></p>
+      <p v-if="aucation" class="text-sm text-slate-500">Penawaran tertinggi saat ini: <b>{{ formatRupiah(highestBid(aucation)) }}</b></p>
       <div><label class="label" for="bid">Nominal (Rp)</label><input id="bid" v-model="nominal" type="number" class="input" /></div>
       <p v-if="error" class="text-sm text-rose-600">{{ error }}</p>
       <div class="flex justify-end gap-2">

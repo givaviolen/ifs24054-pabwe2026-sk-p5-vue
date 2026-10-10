@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { flushPromises } from "@vue/test-utils";
 import AucationLayout from "./AucationLayout.vue";
 import NavbarComponent from "../components/NavbarComponent.vue";
+import SidebarComponent from "../components/SidebarComponent.vue";
 import { createMockPinia, renderWithProviders, stubPage } from "../../../test-utils";
 import { useUsersStore } from "../../users/states/usersStore";
 
@@ -14,5 +15,10 @@ describe("AucationLayout", () => {
     await flushPromises();
     expect(spy).toHaveBeenCalled();
     expect(wrapper.text()).toContain("isi-halaman");
+
+    await wrapper.findComponent(NavbarComponent).vm.$emit("toggle");
+    expect(wrapper.findComponent(SidebarComponent).props("open")).toBe(true);
+    await wrapper.findComponent(SidebarComponent).vm.$emit("close");
+    expect(wrapper.findComponent(SidebarComponent).props("open")).toBe(false);
   });
 });

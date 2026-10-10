@@ -34,10 +34,10 @@ describe("HomePage", () => {
     expect(getAucations).toHaveBeenCalledWith({});
     const cards = wrapper.findAll("article");
     expect(cards).toHaveLength(2);
-    expect(cards[0].text()).toContain("Live");
+    expect(cards[0].text()).toContain("Berlangsung");
     expect(cards[0].text()).toContain("Budi");
     expect(cards[0].find("img").exists()).toBe(true);
-    expect(cards[1].text()).toContain("Berakhir");
+    expect(cards[1].text()).toContain("Ditutup");
     expect(cards[1].find("img").exists()).toBe(false);
   });
 
@@ -48,7 +48,7 @@ describe("HomePage", () => {
     getAucations.mockResolvedValue({ data: { aucations: [] } });
     const empty = await renderWithProviders(HomePage);
     await flushPromises();
-    expect(empty.wrapper.text()).toContain("Tidak Ada Lelang");
+    expect(empty.wrapper.text()).toContain("Belum ada lelang");
   });
 
   it("pencarian berdasarkan judul dan deskripsi", async () => {
@@ -116,7 +116,7 @@ describe("HomePage", () => {
   it("modal tambah: buka, tutup, dan muat ulang setelah ditambahkan", async () => {
     const { wrapper } = await setup();
     expect(wrapper.findComponent(AddModal).props("show")).toBe(false);
-    await button(wrapper, "Lelang Baru").trigger("click");
+    await button(wrapper, "Tambah Lelang").trigger("click");
     expect(wrapper.findComponent(AddModal).props("show")).toBe(true);
     wrapper.findComponent(AddModal).vm.$emit("added");
     await flushPromises();
