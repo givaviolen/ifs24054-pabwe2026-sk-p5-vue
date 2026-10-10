@@ -28,14 +28,17 @@ function inlineCriticalCss() {
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const apiUrl = env.VITE_DELCOM_BASEURL || "https://open-api.delcom.org/api/v1";
+  // Build produksi: request API lewat rewrite Vercel (/api/v1 -> open-api.delcom.org)
+  // sehingga same-origin dan tidak terkena CORS/preflight. Isi VITE_DELCOM_BASEURL untuk menimpa.
+  const baseUrl = mode === "production" && !env.VITE_DELCOM_BASEURL ? "/api/v1" : apiUrl;
   return {
     plugins: [vue(), tailwindcss(), inlineCriticalCss()],
     server: { port: Number(env.APP_PORT) || 3000 },
     preview: { port: Number(env.APP_PORT) || 3000 },
     define: {
-      DELCOM_BASEURL: JSON.stringify(
-        env.VITE_DELCOM_BASEURL || "https://open-api.delcom.org/api/v1"
-      ),
+      DELCOM_BASEURL: JSON.stringify(baseUrl),
+      DELCOM_ASSETURL: JSON.stringify(apiUrl.replace(/\/api\/v\d+\/?$/, "")),
     },
     test: {
       globals: true,

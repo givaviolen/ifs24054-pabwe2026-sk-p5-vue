@@ -34,7 +34,7 @@ export const toInputDate = (value) => (value ? String(value).replace(" ", "T").s
 export const photoUrl = (photo) => {
   if (!photo) return "";
   if (/^https?:\/\//.test(photo)) return photo;
-  return `${new URL(DELCOM_BASEURL).origin}/${photo.replace(/^\//, "")}`;
+  return `${DELCOM_ASSETURL}/${photo.replace(/^\//, "")}`;
 };
 
 export const isClosed = (aucation, now = Date.now()) =>
