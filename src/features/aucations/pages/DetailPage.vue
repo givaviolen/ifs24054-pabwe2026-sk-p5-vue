@@ -64,10 +64,10 @@ async function cancelBid() {
         </div>
         <div class="card">
           <h2 class="mb-3 font-bold">Riwayat Penawaran</h2>
-          <p v-if="!bids.length" class="text-sm text-slate-500">Belum ada penawaran.</p>
+          <p v-if="!bids.length" class="text-sm text-slate-600">Belum ada penawaran.</p>
           <ul class="divide-y divide-slate-100 text-sm">
             <li v-for="b in bids" :key="b.id" class="flex justify-between py-2">
-              <span class="font-semibold">{{ formatRupiah(b.bid) }}</span><span class="text-slate-500">{{ formatDate(b.created_at) }}</span>
+              <span class="font-semibold">{{ formatRupiah(b.bid) }}</span><span class="text-slate-600">{{ formatDate(b.created_at) }}</span>
             </li>
           </ul>
         </div>
@@ -77,6 +77,12 @@ async function cancelBid() {
     <ChangeCoverModal :show="modal === 'cover'" :aucation="a" @close="modal = ''" @changed="load" />
     <BidModal :show="modal === 'bid'" :aucation="a" @close="modal = ''" @bidded="load" />
   </section>
-  <p v-else-if="store.isAucation" class="text-slate-500">Memuat...</p>
-  <p v-else class="card text-center text-slate-500">Lelang tidak ditemukan.</p>
+  <section v-else-if="store.isAucation">
+    <h1 class="sr-only">Detail Lelang</h1>
+    <p class="text-slate-600">Memuat...</p>
+  </section>
+  <section v-else>
+    <h1 class="sr-only">Detail Lelang</h1>
+    <p class="card text-center text-slate-600">Lelang tidak ditemukan.</p>
+  </section>
 </template>
