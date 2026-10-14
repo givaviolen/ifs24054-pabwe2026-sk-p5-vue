@@ -29,7 +29,7 @@ async function submit() {
   <ModalShell :show="show" title="Tambah Lelang" @close="emit('close')">
     <form class="space-y-4" @submit.prevent="submit">
       <div><label class="label" for="a-title">Judul</label><input id="a-title" class="input" :value="title" @input="onTitle" /></div>
-      <div><label class="label">Deskripsi (Markdown)</label><MarkdownEditor v-if="show" v-model="description" /></div>
+      <div><span class="label block">Deskripsi (Markdown)</span><MarkdownEditor v-if="show" v-model="description" /></div>
       <div class="grid gap-4 sm:grid-cols-2">
         <div><label class="label" for="a-bid">Harga Awal (Rp)</label><input id="a-bid" type="number" min="0" class="input" :value="startBid" @input="onStartBid" /></div>
         <div><label class="label" for="a-close">Batas Waktu</label><input id="a-close" type="datetime-local" class="input" :value="closedAt" @input="onClosedAt" /></div>

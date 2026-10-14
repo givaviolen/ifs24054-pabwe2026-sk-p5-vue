@@ -25,13 +25,17 @@ onBeforeUnmount(() => clearInterval(timer));
 const load = () => store.asyncGetAucations(tab.value === "mine" ? { is_me: 1 } : {});
 watch(tab, load, { immediate: true });
 
+function matchesTab(key, closed) {
+  if (key === "open") return !closed;
+  if (key === "closed") return closed;
+  return true;
+}
+
 const filtered = computed(() => {
   const q = search.value.trim().toLowerCase();
   return store.aucations.filter((a) => {
     const matches = !q || a.title.toLowerCase().includes(q) || (a.description || "").toLowerCase().includes(q);
-    const closed = isClosed(a, now.value);
-    const byTab = tab.value === "open" ? !closed : tab.value === "closed" ? closed : true;
-    return matches && byTab;
+    return matches && matchesTab(tab.value, isClosed(a, now.value));
   });
 });
 
@@ -77,10 +81,10 @@ async function deleteAll() {
     </div>
 
     <div v-if="store.isAucation" class="flex justify-center py-12">
-      <div class="flex flex-col items-center gap-4" role="status">
+      <output class="flex flex-col items-center gap-4">
         <div class="h-8 w-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
         <p class="text-slate-600 font-medium">Memuat data lelang...</p>
-      </div>
+      </output>
     </div>
     
     <div v-else-if="!filtered.length" class="flex flex-col items-center justify-center py-16 px-4 bg-white rounded-3xl border border-slate-100 border-dashed">

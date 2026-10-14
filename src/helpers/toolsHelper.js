@@ -27,7 +27,11 @@ export const formatDate = (value) => {
 };
 
 /** "2026-12-31T23:59" (datetime-local) -> "2026-12-31 23:59:00" (API) */
-export const toApiDate = (value) => (value ? value.replace("T", " ") + (value.length === 16 ? ":00" : "") : "");
+export const toApiDate = (value) => {
+  if (!value) return "";
+  const withSeconds = value.length === 16 ? `${value}:00` : value;
+  return withSeconds.replace("T", " ");
+};
 /** "2026-12-31 23:59:00" (API) -> "2026-12-31T23:59" (datetime-local) */
 export const toInputDate = (value) => (value ? String(value).replace(" ", "T").slice(0, 16) : "");
 

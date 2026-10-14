@@ -14,12 +14,13 @@ watch(() => props.show, (s) => { if (s) { nominal.value = ""; error.value = ""; 
 
 async function submit() {
   const current = highestBid(props.aucation);
-  if (!(Number(nominal.value) > current)) {
+  const value = Number(nominal.value);
+  if (value <= current) {
     error.value = `Penawaran harus lebih tinggi dari ${formatRupiah(current)}`;
     return;
   }
   error.value = "";
-  if (await store.asyncAddBid(props.aucation.id, Number(nominal.value))) { emit("bidded"); emit("close"); }
+  if (await store.asyncAddBid(props.aucation.id, value)) { emit("bidded"); emit("close"); }
 }
 </script>
 

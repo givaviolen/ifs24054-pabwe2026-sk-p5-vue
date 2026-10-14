@@ -3,6 +3,14 @@ import { defineStore } from "pinia";
 import * as api from "../api/aucationApi";
 import { runAction } from "../../../helpers/storeHelper";
 
+// Menjalankan mutasi: set flag busy, flag done, lalu kembalikan status berhasil.
+async function mutate(busy, done, fn) {
+  done.value = false;
+  const res = await runAction(busy, fn, { success: true });
+  done.value = !!res;
+  return !!res;
+}
+
 export const useAucationsStore = defineStore("aucations", () => {
   const aucations = ref([]);
   const aucation = ref(null);
@@ -25,14 +33,6 @@ export const useAucationsStore = defineStore("aucations", () => {
     aucation.value = null;
     const res = await runAction(isAucation, () => api.getAucation(id));
     if (res) aucation.value = res.data.aucation;
-    return !!res;
-  }
-
-  // Menjalankan mutasi: set flag busy, flag done, lalu muat ulang jika perlu.
-  async function mutate(busy, done, fn) {
-    done.value = false;
-    const res = await runAction(busy, fn, { success: true });
-    done.value = !!res;
     return !!res;
   }
 

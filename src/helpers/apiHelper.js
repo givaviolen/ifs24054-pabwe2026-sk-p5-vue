@@ -9,7 +9,7 @@ export const removeAccessToken = () => localStorage.removeItem(TOKEN_KEY);
  * Melempar Error (dengan properti `data`) jika status bukan "success".
  */
 export async function apiFetch(path, { method = "GET", body, params, auth = true } = {}) {
-  const url = new URL(DELCOM_BASEURL.replace(/\/$/, "") + path, window.location.origin);
+  const url = new URL(DELCOM_BASEURL.replace(/\/$/, "") + path, globalThis.location.origin);
   Object.entries(params || {}).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, value);
   });
@@ -21,11 +21,10 @@ export async function apiFetch(path, { method = "GET", body, params, auth = true
   const isForm = body instanceof FormData;
   if (body && !isForm) headers["Content-Type"] = "application/json";
 
-  const response = await fetch(url, {
-    method,
-    headers,
-    body: body ? (isForm ? body : JSON.stringify(body)) : undefined,
-  });
+  let payload;
+  if (body) payload = isForm ? body : JSON.stringify(body);
+
+  const response = await fetch(url, { method, headers, body: payload });
   const json = await response.json().catch(() => ({ status: "fail", message: "Respons server tidak valid" }));
 
   if (json.status !== "success") {
